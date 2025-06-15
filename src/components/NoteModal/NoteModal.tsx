@@ -1,13 +1,13 @@
 import css from "./NoteModal.module.css";
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
+import NoteForm from "../NoteForm/NoteForm";
 
 interface NoteModalProps {
   onClose: () => void;
-  children: React.ReactNode;
 }
 
-export default function NoteModal({ onClose, children }: NoteModalProps) {
+export default function NoteModal({ onClose}: NoteModalProps) {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     // закрытие только если клик был именно по backdrop, а не по модалке
     if (event.target === event.currentTarget) {
@@ -35,7 +35,7 @@ export default function NoteModal({ onClose, children }: NoteModalProps) {
     <>
       <div className={css.backdrop} role="dialog" aria-modal="true" onClick={handleBackdropClick}>
         <div className={css.modal} >
-          {children}
+          <NoteForm onCancel={onClose} onSuccess={onClose} />
         </div>
       </div>
     </>,

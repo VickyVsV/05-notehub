@@ -6,6 +6,7 @@ const TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
 export interface GetNote {
   notes: Note[]; // массив заметок
   totalPages: number; // всего страниц (для пагинации)
+  total: number;
 }
 
 export async function fetchNotes(
@@ -39,8 +40,8 @@ export async function createNote(newNote: NewNote): Promise<Note> {
   return response.data;
 }
 
-export const deleteNote = async (id: number) => {
-  const res = await axios.delete(
+export const deleteNote = async (id: number): Promise<Note> => {
+  const res = await axios.delete<Note>(
     `https://notehub-public.goit.study/api/notes/${id}`,
     {
       headers: {
@@ -48,14 +49,7 @@ export const deleteNote = async (id: number) => {
       },
     }
   );
-  return res;
+  return res.data;
 };
 
-/* export async function deleteNote(id: number): Promise<void> {
-  await axios.delete(`https://notehub-public.goit.study/api/notes/${id}`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
-}
- */
+

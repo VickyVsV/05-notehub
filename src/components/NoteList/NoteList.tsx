@@ -21,10 +21,6 @@ export default function NoteList({ notes }: NoteListProps) {
     },
   });
 
-  /*   const handleDelete = (noteID: number) => {
-    mutathionDel.mutate();
-  } */
-
   return (
     <ul className={css.list}>
       {notes.map((note) => (
